@@ -4,7 +4,7 @@
  * 2.sudo ./mongod --dbpath=/Users/{username}/data
  * 3.sudo ./mongo
  */
-
+require('dotenv').config();
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-mongoose.connect("mongodb://localhost/buggy");
+mongoose.connect(process.env.DB_HOST_PROD);
 const db = mongoose.connection;
 
 ///與資料庫連線發生錯誤時
