@@ -9,6 +9,8 @@ const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
 
+const hostname = "0.0.0.0"
+
 const PORT = process.env.PORT || 3001;
 
 const app = express();
@@ -26,6 +28,10 @@ app.use(cors());
 ///重要!! 要加這行才可以讓req.json讀的到資料
 app.use(express.json());
 
+app.get("/hello", (req, res) => {
+  res.send("Hello World");
+});
+
 const linkRouter = require("./routes/Links");
 app.use("/link",linkRouter);
 
@@ -33,6 +39,8 @@ const tagRouter = require("./routes/Tags");
 app.use("/tag",tagRouter);
 
 
-app.listen(PORT, () => {
+app.listen(PORT, hostname, () => {
   console.log(`Server listening on ${PORT}`);
 });
+
+module.exports = app;
